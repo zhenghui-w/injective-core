@@ -15,12 +15,14 @@ module.exports = {
     injectiveLocal: {
       url: "http://localhost:8545",
       accounts: [
-        // Default hardhat accounts for local development
-        "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
-        "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
-        "0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a"
+        // Funded accounts from setup script
+        "0xe9b1d63e8acd7fe676acb43afb390d4b0202dab61abec9cf2a561e4becb147de", // localkey (VAL_KEY)
+        "0x88cbead91aee890d27bf06e003ade3d4e952427e88f88d31d61d3ef5e5d54305", // user1
+        "0x741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544", // user2
+        // Adding a known authorized deployer private key if available
+        "0x92db14e403b83dfe3df233f83dfa3a0d7096f21ca9b0d6d6b8d88b2b4ec1564e"  // placeholder - need to find actual key
       ],
-      chainId: 1337
+      chainId: 1776
     }
   }
 };

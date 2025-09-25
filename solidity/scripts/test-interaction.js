@@ -13,8 +13,12 @@ async function main() {
   console.log("Alice:", alice.address);
   console.log("Bob:", bob.address);
   
+  // Check deployment info to use correct contract type
+  const contractType = deploymentInfo.contractType || "MyUSDC";
+  console.log("Contract type:", contractType);
+  
   // Get contract instance
-  const MyUSDC = await ethers.getContractFactory("MyUSDC");
+  const MyUSDC = await ethers.getContractFactory(contractType);
   const myUSDC = MyUSDC.attach(contractAddress);
   
   console.log("\n=== Initial State ===");
