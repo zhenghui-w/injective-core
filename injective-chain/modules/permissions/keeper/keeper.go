@@ -16,18 +16,20 @@ type Keeper struct {
 	bankKeeper types.BankKeeper
 	tfKeeper   types.TokenFactoryKeeper
 	wasmKeeper types.WasmKeeper
+	evmKeeper  types.EVMKeeper
 
 	tfModuleAddress string
 	moduleAccounts  map[string]bool
 	authority       string
 }
 
-// NewKeeper returns a new instance of the x/tokenfactory keeper
+// NewKeeper returns a new instance of the x/permissions keeper
 func NewKeeper(
 	storeKey storetypes.StoreKey,
 	bankKeeper types.BankKeeper,
 	tfKeeper types.TokenFactoryKeeper,
 	wasmKeeper types.WasmKeeper,
+	evmKeeper types.EVMKeeper,
 	tfModuleAddress string,
 	moduleAccounts map[string]bool,
 	authority string,
@@ -37,6 +39,7 @@ func NewKeeper(
 		bankKeeper:      bankKeeper,
 		tfKeeper:        tfKeeper,
 		wasmKeeper:      wasmKeeper,
+		evmKeeper:       evmKeeper,
 		tfModuleAddress: tfModuleAddress,
 		moduleAccounts:  moduleAccounts,
 		authority:       authority,

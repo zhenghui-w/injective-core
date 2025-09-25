@@ -47,6 +47,11 @@ func (k Keeper) SendRestrictionFn(ctx context.Context, fromAddr, toAddr sdk.AccA
 		return toAddr, nil
 	}
 
+	// Check ERC20 restrictions first (pause/blacklist from EVM contract)
+	if err := k.CheckERC20Restrictions(ctx, amount.Denom, fromAddr, toAddr); err != nil {
+		return toAddr, err
+	}
+
 	// find namespace for denom
 	namespace, _ := k.GetNamespace(sdkCtx, amount.Denom, false)
 

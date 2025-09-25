@@ -1390,6 +1390,7 @@ func (app *InjectiveApp) initKeepers(authority string, appOpts servertypes.AppOp
 		app.BankKeeper,
 		app.TokenFactoryKeeper,
 		app.WasmKeeper,
+		app.EvmKeeper,
 		authtypes.NewModuleAddress(tokenfactorytypes.ModuleName).String(),
 		GetModuleAccAddresses(),
 		authority,
