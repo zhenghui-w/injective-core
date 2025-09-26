@@ -1,0 +1,8 @@
+{
+  "contractAddress": "0x717736C291408a540991e868C947F511BA493220",
+  "erc20Denom": "erc20:0x717736c291408a540991e868c947f511ba493220",
+  "bankPrecompile": null,
+  "deployer": "0x7cB61D4117AE31a12E393a1Cfa3BaC666481D02E",
+  "timestamp": "2025-09-26T22:38:58.660Z",
+  "contractType": "MyUSDCTest"
+}

@@ -101,3 +101,4 @@ contract BankERC20Simple is ERC20 {
         super._update(from, to, value);
     }
 }
+

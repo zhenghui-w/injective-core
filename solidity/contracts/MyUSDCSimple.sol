@@ -115,3 +115,4 @@ contract MyUSDCSimple is BankERC20Simple, Ownable {
         return super.approve(spender, amount);
     }
 }
+

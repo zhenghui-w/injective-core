@@ -305,6 +305,123 @@
       "artifacts": [
         "Ownable"
       ]
+    },
+    "/Users/zhenghui.wang/Repos/ext/injective-core/solidity/contracts/BankERC20Simple.sol": {
+      "lastModificationDate": 1758842992140,
+      "contentHash": "609661e01ce1f812ab3edfebc85aaa7d",
+      "sourceName": "contracts/BankERC20Simple.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "BankERC20Simple",
+        "IBankModule"
+      ]
+    },
+    "/Users/zhenghui.wang/Repos/ext/injective-core/solidity/contracts/MyUSDCSimple.sol": {
+      "lastModificationDate": 1758842992166,
+      "contentHash": "8a78a15cee8e395b7ec7f0cc1fb0bea4",
+      "sourceName": "contracts/MyUSDCSimple.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "./BankERC20Simple.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MyUSDCSimple"
+      ]
+    },
+    "/Users/zhenghui.wang/Repos/ext/injective-core/solidity/contracts/MyUSDCTest.sol": {
+      "lastModificationDate": 1758842992271,
+      "contentHash": "07ac870f09189c186df16f0c2c7ac92e",
+      "sourceName": "contracts/MyUSDCTest.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MyUSDCTest"
+      ]
     }
   }
 }

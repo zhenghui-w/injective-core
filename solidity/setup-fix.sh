@@ -34,3 +34,4 @@ echo "2. npm run deploy:local"
 echo "3. npm run test"
 echo ""
 echo "Start the node with: ./injectived.sh"
+

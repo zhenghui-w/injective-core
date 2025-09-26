@@ -120,6 +120,202 @@ npx hardhat run scripts/test-interaction.js --network injectiveLocal
 ./scripts/test-cosmos-integration.sh
 ```
 
+## Step-by-Step Guide: Running Cosmos Integration Tests
+
+This comprehensive guide walks you through setting up and running the full EVM-Cosmos integration test.
+
+### Prerequisites
+
+Before running the integration test, ensure you have:
+
+1. **Go 1.19+** installed and in your PATH
+2. **Node.js 16+** and npm installed  
+3. **jq** JSON processor installed
+4. **Access to terminal** with bash shell
+
+### Step 1: Navigate to Project Root
+
+```bash
+cd /Users/zhenghui.wang/Repos/ext/injective-core
+```
+
+### Step 2: Build Injective Binary
+
+```bash
+# Build the injectived binary
+make install
+
+# Verify installation
+which injectived
+injectived version
+```
+
+### Step 3: Initialize and Start the Injective Chain
+
+```bash
+# Stop any existing processes
+killall injectived || true
+
+# Clean up old data
+rm -rf .injectived
+
+# Initialize chain with our fixes
+./setup.sh
+
+# Start the node (in background)
+./injectived.sh &
+
+# Wait for node to start (about 30 seconds)
+sleep 30
+```
+
+### Step 4: Verify Node Status
+
+```bash
+# Check Cosmos node (should return block height > 0)
+curl -s http://localhost:26657/status | jq -r '.result.sync_info.latest_block_height'
+
+# Check EVM node (should return chain ID)
+curl -s http://localhost:8545 -X POST -H "Content-Type: application/json" \
+  --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":1}'
+```
+
+Expected output:
+- Cosmos: Block height like `4` or higher
+- EVM: `{"jsonrpc":"2.0","id":1,"result":"1"}`
+
+### Step 5: Setup Node Dependencies
+
+```bash
+# Navigate to solidity directory
+cd solidity
+
+# Install dependencies
+npm install
+```
+
+### Step 6: Deploy Test Contract
+
+```bash
+# Deploy the working test contract
+npx hardhat run scripts/deploy-test.js --network injectiveLocal
+
+# Verify deployment
+cat deployment.json
+```
+
+Expected output should show:
+- `contractAddress`: The deployed contract address
+- `contractType`: `MyUSDCTest`
+- Deployer address with adequate balance
+
+### Step 7: Run Integration Test
+
+```bash
+# Execute the full integration test
+./scripts/test-cosmos-integration.sh
+```
+
+### Understanding Test Results
+
+The integration test performs these operations:
+
+#### ✅ **Expected Working Components:**
+
+1. **EVM Contract Operations**: 
+   - Mint tokens ✅
+   - Pause/unpause ✅  
+   - Blacklist/unblacklist ✅
+   - Transfer restrictions ✅
+
+2. **Cosmos Bank Operations**:
+   - Account creation ✅
+   - Bank transfers ✅
+   - Transaction broadcasting ✅
+
+#### ⚠️ **Expected Integration Gap:**
+
+3. **EVM-Cosmos Integration**:
+   - EVM pause state **not enforced** in Cosmos transfers ❌
+   - EVM blacklist **not enforced** in Cosmos transfers ❌
+
+This is expected behavior because the permissions module needs to be configured to check EVM contract state.
+
+#### Sample Expected Output:
+
+```
+🚀 MyUSDC Integration Test
+=========================
+✅ Injective node is running
+✅ Test accounts ready
+✅ EVM Contract: Working perfectly
+✅ Cosmos Bank: Working correctly
+❌ EVM-Cosmos Integration: Not active
+   - This requires proper permissions module configuration
+```
+
+### Step 8: Run EVM-Only Test (Optional)
+
+To verify EVM functionality works perfectly:
+
+```bash
+npx hardhat run scripts/test-interaction.js --network injectiveLocal
+```
+
+This should show all EVM operations working correctly.
+
+### Troubleshooting Integration Test
+
+#### Issue: Script fails immediately
+**Check**: Node is running
+```bash
+curl -s http://localhost:26657/status
+```
+
+#### Issue: Contract deployment fails  
+**Check**: Contract has actual code deployed
+```bash
+HARDHAT_NETWORK=injectiveLocal node -e "
+const { ethers } = require('hardhat');
+const fs = require('fs');
+const deployment = JSON.parse(fs.readFileSync('./deployment.json', 'utf8'));
+ethers.provider.getCode(deployment.contractAddress)
+  .then(code => console.log('Has code:', code !== '0x' && code.length > 2));
+"
+```
+
+#### Issue: "key not found" errors
+**Solution**: The test creates its own accounts (`user1`, `user2`) if needed.
+
+#### Issue: Cosmos balances show empty
+**Note**: This is cosmetic - transfers still work. The ERC20 denom format may not display properly in balance queries.
+
+#### Issue: Integration tests fail
+**Expected**: Integration tests will fail because EVM state is not enforced in Cosmos transfers. This is the expected behavior until the permissions module is configured.
+
+### Clean Up (Optional)
+
+After testing, you can stop the node:
+
+```bash
+# Stop the injective node
+killall injectived
+
+# Clean up test data
+rm -rf .injectived
+rm -f solidity/deployment.json
+```
+
+### Next Steps for Full Integration
+
+To enable complete EVM-Cosmos integration:
+
+1. **Configure Permissions Module**: Ensure it's wired to check EVM contract state
+2. **Restart Chain**: Apply EVM permissions fix from `upgrade.go`
+3. **Test Again**: Integration should then fully work
+
+The current setup provides a complete development and testing environment for EVM contract development with clear diagnostics for integration status.
+
 ### Troubleshooting
 
 #### Contract Deployment Issues

@@ -34,3 +34,4 @@ For testing purposes, we need to either:
 ## Files to Modify
 - `injective-chain/app/upgrades/*/upgrade.go` - Where EVM params are set
 - `setup.sh` - For localnet configuration
+

@@ -170,3 +170,4 @@ echo ""
 echo "🛑 To stop the node: kill $NODE_PID"
 echo ""
 echo "Happy coding! 🎯"
+

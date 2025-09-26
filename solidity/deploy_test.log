@@ -1,0 +1,12 @@
+Compiled 3 Solidity files successfully (evm target: paris).
+Deploying MyUSDCTest with the account: 0x7cB61D4117AE31a12E393a1Cfa3BaC666481D02E
+Account balance: 1000000000000000000000
+MyUSDCTest deployed to: 0x717736C291408a540991e868C947F511BA493220
+Testing basic functions...
+✅ Name: MyUSD Coin
+✅ Symbol: mUSDC
+✅ Decimals: 6n
+✅ Owner: 0x7cB61D4117AE31a12E393a1Cfa3BaC666481D02E
+✅ Paused: false
+ERC20 denom in bank module: erc20:0x717736c291408a540991e868c947f511ba493220
+Deployment info saved to deployment.json
