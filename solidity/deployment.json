@@ -1,8 +1,8 @@
 {
-  "contractAddress": "0x717736C291408a540991e868C947F511BA493220",
-  "erc20Denom": "erc20:0x717736c291408a540991e868c947f511ba493220",
-  "bankPrecompile": null,
+  "contractAddress": "0xb058182F5619BCfb385A74F962d170Bb5617D0A6",
+  "erc20Denom": "erc20:0xb058182f5619bcfb385a74f962d170bb5617d0a6",
+  "bankPrecompile": "0x0000000000000000000000000000000000000064",
   "deployer": "0x7cB61D4117AE31a12E393a1Cfa3BaC666481D02E",
-  "timestamp": "2025-09-26T22:38:58.660Z",
-  "contractType": "MyUSDCTest"
+  "timestamp": "2025-09-27T02:17:33.154Z",
+  "contractType": "MyUSDCSimple"
 }
